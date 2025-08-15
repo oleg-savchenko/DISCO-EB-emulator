@@ -1,0 +1,56 @@
+cosmopower_jax                    0.5.5
+diffrax                           0.7.0
+jax                               0.5.0
+jax_autovmap                      0.2.1
+jax-cosmo                         0.1.0
+jax-cuda12-pjrt                   0.5.0
+jax-cuda12-plugin                 0.5.0
+jax-tqdm                          0.1.1
+jaxlib                            0.5.0
+jaxopt                            0.6
+jaxtyping                         0.2.34
+numpy                             1.26.4
+
+
+
+conda deactivate
+
+module load 2022
+module load Python/3.10.4-GCCcore-11.3.0
+
+python -m venv ~/venvs/eb
+source ~/venvs/eb/bin/activate
+
+pip install --upgrade pip
+pip install numpy==1.26.4 matplotlib ipykernel
+pip install .
+pip install jax==0.5.0 jaxlib==0.5.0 "jax-cuda12-plugin[with-cuda]"==0.5.0
+pip install diffrax==0.7.0
+
+python -m ipykernel install --user --name=ep --display-name "Python (eb)"
+pip install --upgrade typing_extensions
+
+
+
+
+####################################
+
+module load 2023
+module load Python/3.11.3-GCCcore-12.3.0
+module load TensorFlow/2.15.1-foss-2023a-CUDA-12.1.1
+
+module load CUDA/11.7.0
+module load cuDNN/8.4.1.50-CUDA-11.7.0
+
+module load CUDA/11.8.0
+module load cuDNN/8.6.0.163-CUDA-11.8.0
+
+python -c "import tensorflow as tf; print(tf.__version__)"
+
+
+
+rm -rf /home/osavchenko/venvs/cp
+
+
+
+

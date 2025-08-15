@@ -871,7 +871,7 @@ def evolve_modes_batched( *, tau_max, tau_out, param, kmodes,
 
 
 
-def evolve_perturbations( *, param, aexp_out, kmin : float, kmax : float, num_k : int,
+def evolve_perturbations( *, param, aexp_out, kmodes : jnp.ndarray, kmin : float = 1e-5, kmax : float = 1e1, num_k : int = 256,
                          lmaxg : int = 11, lmaxgp : int = 11, lmaxr : int = 11, lmaxnu : int = 8,
                          nqmax : int = 3, rtol: float = 1e-4, atol: float = 1e-4,
                          pcoeff : float = 0.25, icoeff : float = 0.80, dcoeff : float = 0.0,
@@ -912,8 +912,10 @@ def evolve_perturbations( *, param, aexp_out, kmin : float, kmax : float, num_k 
     k : jnp.ndarray
         array of shape (num_k) containing the wavenumbers [in units 1/Mpc]
     """
-    kmodes = jnp.geomspace(kmin, kmax, num_k)
-    
+    if kmodes is not None:
+        kmodes = kmodes
+    else:
+        kmodes = jnp.geomspace(kmin, kmax, num_k)
 
     # determine output times from aexp_out
     tau_out = jax.vmap( lambda a: param['tau_of_a_spline'].evaluate(a) )(aexp_out)

@@ -3,5 +3,8 @@ docs/_build
 *.egg-info/
 dist/
 build/
+training_data/
+plots/
+*.npz
 
 */__pycache__

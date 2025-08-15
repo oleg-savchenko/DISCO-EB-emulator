@@ -1,0 +1,39 @@
+conda deactivate
+
+module load 2022
+module load Python/3.10.4-GCCcore-11.3.0
+module load CUDA/11.8.0
+module load cuDNN/8.6.0.163-CUDA-11.8.0 
+
+python -m venv ~/venvs/cp
+source ~/venvs/cp/bin/activate
+
+pip install --upgrade pip
+pip install numpy matplotlib cosmopower ipykernel
+python -m ipykernel install --user --name=cp --display-name "Python (cp)"
+pip install --upgrade typing_extensions
+
+
+
+
+####################################
+
+module load 2023
+module load Python/3.11.3-GCCcore-12.3.0
+module load TensorFlow/2.15.1-foss-2023a-CUDA-12.1.1
+
+module load CUDA/11.7.0
+module load cuDNN/8.4.1.50-CUDA-11.7.0
+
+module load CUDA/11.8.0
+module load cuDNN/8.6.0.163-CUDA-11.8.0
+
+python -c "import tensorflow as tf; print(tf.__version__)"
+
+
+
+rm -rf /home/osavchenko/venvs/cp
+
+
+
+
